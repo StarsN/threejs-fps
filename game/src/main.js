@@ -5,12 +5,12 @@
 // capture, renders it twice, then freezes it and sets window.__shotReady.
 import * as THREE from 'three';
 import { PALETTE } from './palette.js';
-import { mulberry32, range } from './rng.js';
+import { mulberry32 } from './rng.js';
 import { createMap, SITES } from './map.js';
 import { createBody, createMover } from './mover.js';
-import { createWeaponRig, WEAPONS } from './weapons.js';
+import { createWeaponRig } from './weapons.js';
 import { createSquad } from './bots.js';
-import { createBomb, FUSE_SECONDS, BLAST_RADIUS } from './bomb.js';
+import { createBomb, BLAST_RADIUS } from './bomb.js';
 import { createEconomy } from './economy.js';
 import { createAudio } from './audio.js';
 import { createHud } from './hud.js';
@@ -70,7 +70,6 @@ const _hit = new THREE.Vector3();
 
 let elapsed = 0;
 let frozen = false;
-let started = false;
 let accumulator = 0;
 let lastTime = performance.now();
 let roundEndAt = 0;
@@ -110,7 +109,6 @@ scene.add(blastMesh);
 const blastLight = new THREE.PointLight(new THREE.Color(PALETTE.accent), 0, 24, 1.5);
 scene.add(blastLight);
 let blastAge = -1;
-const blastAt = new THREE.Vector3();
 
 function drawTracer(from, to) {
   const tracer = tracers[tracerIndex];
@@ -765,7 +763,6 @@ hud.onPlay(() => {
 function onLockChange(locked) {
   if (shot) return;
   if (locked) {
-    started = true;
     hud.hideOverlay();
   } else if (match.phase === 'menu') {
     hud.showOverlay('start');
