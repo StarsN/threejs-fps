@@ -661,7 +661,7 @@ function runShot(name) {
     settle(20);
     buyOpen = true;
     hud.showBuy(economy.describe());
-    hud.banner('Round 1', 'Buy phase — press B for the armoury', 6000);
+    hud.banner('Round 1', 'Buy phase — press B for the armoury', 60000);
     paintTwiceThenReady();
     return;
   }
@@ -720,7 +720,8 @@ function runShot(name) {
     settle(20);
     hud.setScore(1, 0);
     hud.showBomb('A', 28);
-    hud.banner('Sable takes the round', 'Charge planted at Site A · 1 — 0', 6000);
+    hud.setTimer('0:28');
+    hud.banner('Sable takes the round', 'Charge planted at Site A · 1 — 0', 60000);
   }
   paintTwiceThenReady();
 }
